@@ -87,11 +87,16 @@ function toggleButton(){
 
 
 //passing joke to voice rss api
-function tellMe(joke){
-  console.log('tell me:', joke);
+function toggleButton() {
+  button.disabled = !button.disabled;
+}
+
+// Passing joke to VoiceRSS API
+function tellMe(joke) {
+  console.log('Telling joke:', joke);
   VoiceRSS.speech({
-    key: 'd059f30c8fa6459a8b7aa2434867fd94', 
-    src: joke,     
+    key: 'd059f30c8fa6459a8b7aa2434867fd94',
+    src: joke,
     hl: 'en-us',
     v: 'Linda',
     r: 0,
@@ -100,31 +105,31 @@ function tellMe(joke){
     ssml: false,
   });
 }
-   
-//get jokes from joke api
-async function getJokes(){
-  let joke='';
+
+// Get jokes from Joke API
+async function getJokes() {
+  let joke = '';
   const apiUrl = 'https://v2.jokeapi.dev/joke/Programming,Miscellaneous,Dark,Pun,Spooky,Christmas?blacklistFlags=religious,political,explicit';
-  try{
-const response = await fetch(apiUrl);
-const data = await response.json();
-if (data.setup){
-  joke= `${data.setup}...${data.delivery}`;
-} else {
-  joke = data.joke
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    joke = data.setup ? `${data.setup}...${data.delivery}` : data.joke;
+
+    // Tell the joke
+    tellMe(joke);
+
+    // Disable button while the joke is being told
+    toggleButton();
+  } catch (error) {
+    console.error('Error fetching joke:', error);
+  }
 }
-tellMe(joke); 
-//disable button while telling joke
-toggleButton();
-  } catch (error){   
-    //catch errors here
-    console.log('whoops', error);
-  }  
-}    
-getJokes();      
 
-button.addEventListener('click', getJokes) ;
-document.getElementById('audio').remove();   
+// Event Listeners
+button.addEventListener('click', () => {
+  getJokes();
+});
 
-audioElement.addEventListener('ended', toggleButton)
-    
+audioElement.addEventListener('ended', toggleButton);
+document.getElementById('audio').remove();  
