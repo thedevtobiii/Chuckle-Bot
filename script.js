@@ -110,11 +110,14 @@ function tellMe(joke) {
 async function getJokes() {
   let joke = '';
   const apiUrl = 'https://v2.jokeapi.dev/joke/Programming,Miscellaneous,Dark,Pun,Spooky,Christmas?blacklistFlags=religious,political,explicit';
+  const jokeTextElement = document.getElementById('joke-text');
 
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
     joke = data.setup ? `${data.setup}...${data.delivery}` : data.joke;
+    jokeTextElement.innerText = joke;  
+      
 
     // Tell the joke
     tellMe(joke);
@@ -133,3 +136,7 @@ button.addEventListener('click', () => {
 
 audioElement.addEventListener('ended', toggleButton);
 document.getElementById('audio').remove();  
+
+
+
+

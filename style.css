@@ -1,5 +1,7 @@
 
-html {
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Vinyl&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+*{
   box-sizing: border-box;
 }
 body{
@@ -23,7 +25,10 @@ button{
   outline: none;
   width: 200px;
   height: 50px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: "Orbitron", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   font-size: 20px;
   color: white;
   background: #ff3482;
@@ -31,6 +36,17 @@ button{
   border-radius: 15px;
   box-shadow: 2px 2px 20px 10px 
 
+}
+#joke-container{
+  height: 1vh;
+}
+#joke-text{
+  margin-top: 20vh;
+  color: rgb(239, 76, 103);
+  font-family: "Rubik Vinyl", serif;
+  font-weight: 1000;
+  font-style: normal;
+  
 }
 
 button:hover{
@@ -42,6 +58,7 @@ button:disabled{
   filter: brightness(30%);  
 }
 
+
 /* for tablet or smaller */
 @media screen and (max-width:1000px){
   .container{
@@ -52,3 +69,4 @@ button:disabled{
     box-shadow: 5px 5px 30px 20px;
   }
 }
+
